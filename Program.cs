@@ -24,6 +24,9 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
+// use session middlewares
+app.UseSession();
+
 app.UseAuthorization();
 
 app.MapStaticAssets();

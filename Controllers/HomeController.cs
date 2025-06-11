@@ -1,31 +1,25 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using SessionBasics.Models;
 
-namespace SessionBasics.Controllers;
-
-public class HomeController : Controller
+namespace SessionBasics.Controllers
 {
-    private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
+    public class HomeController : Controller
     {
-        _logger = logger;
-    }
+        public IActionResult Index()
+        {
+            //store a string in a session
+            HttpContext.Session.SetString("UserName", "Piyush Singh");
 
-    public IActionResult Index()
-    {
-        return View();
-    }
+            //retrive username here
+            var name = HttpContext.Session.GetString("UserName");
+            ViewBag.Name = name;
+            return View();
 
-    public IActionResult Privacy()
-    {
-        return View();
-    }
+        }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        public IActionResult ClearSession()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index");
+        }
     }
 }
