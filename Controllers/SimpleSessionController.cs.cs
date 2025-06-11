@@ -2,12 +2,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SessionBasics.Controllers
 {
-    public class HomeController : Controller
+    public class SimpleSessionController : Controller
     {
         public IActionResult Index()
         {
             //store a string in a session
-            HttpContext.Session.SetString("UserName", "Piyush Singh");
+            HttpContext.Session.SetString("UserName", "SimpleSessionController.Piyush Singh");
 
             //retrive username here
             var name = HttpContext.Session.GetString("UserName");
